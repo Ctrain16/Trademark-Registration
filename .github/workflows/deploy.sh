@@ -2,6 +2,7 @@
 set -e
 user="ubuntu"
 
+#test
 rm -rf .git
 rm -rf .gitignore
 git config --global user.email "cal16trainor@gmail.com"
