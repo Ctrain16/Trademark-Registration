@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Footer from "./components/Footer";
 import Register from "./components/Register";
+import Trademarks from "./components/Trademarks";
 
 function App() {
   const trademarkCategories = [
@@ -60,6 +61,10 @@ function App() {
   const [email, setEmail] = useState("");
   const [resultsList, setResultsList] = useState([]);
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [ownerEmail, setOwnerEmail] = useState("");
+  const [date, setDate] = useState("");
 
   return (
     <div>
@@ -77,6 +82,14 @@ function App() {
                 resultsList={resultsList}
                 setResultsList={setResultsList}
                 trademarkCategories={trademarkCategories}
+                category={category}
+                setCategory={setCategory}
+                ownerName={ownerName}
+                setOwnerName={setOwnerName}
+                ownerEmail={ownerEmail}
+                setOwnerEmail={setOwnerEmail}
+                date={date}
+                setDate={setDate}
               />
             )}
           />
@@ -91,7 +104,17 @@ function App() {
               />
             )}
           />
-          <Route path="/Signup" component={Signup} exact />
+          <Route
+            path="/Signup"
+            exact
+            render={(props) => (
+              <Signup
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                setEmail={setEmail}
+              />
+            )}
+          />
           <Route
             path="/Register"
             exact
@@ -104,7 +127,27 @@ function App() {
               />
             )}
           />
-          <Route path="/Results" exact />
+          <Route
+            path="/Trademarks"
+            exact
+            render={(props) => (
+              <Trademarks
+                resultsList={resultsList}
+                setResultsList={setResultsList}
+                search={search}
+                setSearch={setSearch}
+                trademarkCategories={trademarkCategories}
+                category={category}
+                setCategory={setCategory}
+                ownerName={ownerName}
+                setOwnerName={setOwnerName}
+                ownerEmail={ownerEmail}
+                setOwnerEmail={setOwnerEmail}
+                date={date}
+                setDate={setDate}
+              />
+            )}
+          />
         </Switch>
         <Footer />
       </Router>

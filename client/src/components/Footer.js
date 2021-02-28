@@ -21,7 +21,9 @@ function Footer() {
         <Button component={Link} to="/Register">
           Register Trademark
         </Button>
-        <Button>View Trademarks</Button>
+        <Button component={Link} to="/Trademarks">
+          View Trademarks
+        </Button>
       </ButtonGroup>
     </div>
   );

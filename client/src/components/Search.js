@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 import { Button, InputAdornment, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -10,36 +10,40 @@ function Search({
   setResultsList,
   searchType,
   trademarkCategories,
+  ownerName,
+  setOwnerName,
+  ownerEmail,
+  setOwnerEmail,
+  category,
+  setCategory,
+  date,
+  setDate,
 }) {
   const history = useHistory();
 
-  const [category, setCategory] = useState("");
-  const [ownerName, setOwnerName] = useState("");
-  const [ownerEmail, setOwnerEmail] = useState("");
-  const [date, setDate] = useState("");
-
-  function onSubmit(e) {
-    e.preventDefault(); //doesn't submit to page
-
-    Axios.post("http://localhost:3001/api/search", {
-      query: search,
-      name: ownerName,
-      email: ownerEmail,
-      date: date,
-      category: category,
-    }).then((response) => {
-      setResultsList(response.data);
-      history.push("/ViewTrademarks");
-    });
+  function searchDatabase() {
+    axios
+      .post("http://localhost:3001/api/search", {
+        query: search,
+        name: ownerName,
+        email: ownerEmail,
+        date: date,
+        category: category,
+      })
+      .then((response) => {
+        console.log(response);
+        setResultsList(response.data);
+        history.push("/Trademarks");
+      });
   }
 
   return (
-    <div className="results-container">
+    <div>
       <div className={searchType === "home" ? "search" : "results-search"}>
         <h1>CTRC</h1>
         {searchType === "home" && <h3> Cal's Trademark Registration Center</h3>}
 
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <TextField
               type="text"
@@ -59,14 +63,16 @@ function Search({
             />
           </div>
           <div>
-            <Button variant="outlined">Search</Button>
+            <Button variant="outlined" onClick={searchDatabase}>
+              Search
+            </Button>
           </div>
         </form>
       </div>
 
       {searchType === "results" && (
         <div className="advanced-search">
-          <form onSubmit={onSubmit}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <select
               name="category"
               onChange={(e) => setCategory(e.target.value)}

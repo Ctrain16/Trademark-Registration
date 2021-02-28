@@ -29,6 +29,7 @@ app.post("/api/signup", async (req, res) => {
   try {
     const user = new User({ name, email, password });
     await user.save();
+    res.send(user);
   } catch (error) {
     console.log("Error", error);
     res.send("Duplicate Email");
@@ -72,6 +73,33 @@ app.post("/api/register", async (req, res) => {
   } catch (error) {
     console.log("Error", error);
     res.send("Trademark Exists");
+  }
+});
+
+app.get("/api/trademarks", async (req, res) => {
+  const trademarks = await Trademark.find();
+  res.send(trademarks);
+});
+
+app.post("/api/search", async (req, res) => {
+  const { name, email, category, date } = req.body;
+  const search = req.body.query;
+  console.log(date);
+
+  try {
+    const results = await Trademark.find({
+      $and: [
+        { trademark: { $regex: search } },
+        { category: { $regex: category } },
+        { owner: { $regex: name } },
+        { email: { $regex: email } },
+        { registrationDate: { $gte: date } },
+      ],
+    });
+    console.log(results);
+    res.send(results);
+  } catch (error) {
+    console.log("Error", error);
   }
 });
 

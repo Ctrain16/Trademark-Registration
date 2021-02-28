@@ -22,7 +22,6 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
           email: tempEmail.toLowerCase(),
         })
         .then((response) => {
-          console.log(response);
           if (response.data !== "") {
             if (response.data.password === password) {
               //email is registered and correct password was supplied

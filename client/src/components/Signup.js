@@ -1,15 +1,17 @@
 import { Button, TextField, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-function Signup() {
+function Signup({ loggedIn, setLoggedIn, setEmail }) {
+  const history = useHistory();
+
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [tempEmail, setTempEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function signupUser() {
-    if (!name || !email || !password) {
+    if (!name || !tempEmail || !password) {
       alert("Missing name, email, or password");
       return;
     }
@@ -17,13 +19,20 @@ function Signup() {
     axios
       .post("http://localhost:3001/api/signup", {
         name: name,
-        email: email.toLowerCase(),
+        email: tempEmail.toLowerCase(),
         password: password,
       })
       .then((response) => {
         if (response.data === "Duplicate Email") {
           alert("Email has already been registered.");
           return;
+        } else {
+          setLoggedIn(true);
+          setEmail(tempEmail.toLowerCase());
+          setName("");
+          setTempEmail("");
+          setPassword("");
+          history.push("/");
         }
       });
   }
@@ -49,8 +58,8 @@ function Signup() {
               label="Email"
               variant="outlined"
               placeholder="example@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={tempEmail}
+              onChange={(e) => setTempEmail(e.target.value)}
             />
           </div>
           <div>

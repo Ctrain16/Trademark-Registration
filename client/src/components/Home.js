@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 import { Button } from "@material-ui/core";
 import Search from "./Search";
@@ -11,7 +12,31 @@ function Home({
   resultsList,
   setResultsList,
   trademarkCategories,
+  ownerName,
+  setOwnerName,
+  ownerEmail,
+  setOwnerEmail,
+  category,
+  setCategory,
+  date,
+  setDate,
 }) {
+  useEffect(() => {
+    setSearch("");
+    setResultsList([]);
+    setOwnerName("");
+    setOwnerEmail("");
+    setCategory("");
+    setDate("");
+  }, [
+    setSearch,
+    setResultsList,
+    setOwnerName,
+    setOwnerEmail,
+    setCategory,
+    setDate,
+  ]);
+
   return (
     <div className="App">
       <Search
@@ -20,6 +45,14 @@ function Home({
         setResultsList={setResultsList}
         searchType="home"
         trademarkCategories={trademarkCategories}
+        category={category}
+        setCategory={setCategory}
+        ownerName={ownerName}
+        setOwnerName={setOwnerName}
+        ownerEmail={ownerEmail}
+        setOwnerEmail={setOwnerEmail}
+        date={date}
+        setDate={setDate}
       />
       {loggedIn ? (
         <Button variant="contained" color="secondary" onClick={onClick}>
