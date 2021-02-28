@@ -13,10 +13,7 @@ mongoose.connect(
 );
 
 const app = express();
-console.log(process.env.NODE_ENV, " is production======================");
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("/home/ubuntu/webapp/client/build"));
-}
+app.use(express.static("/home/ubuntu/webapp/client/build"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());

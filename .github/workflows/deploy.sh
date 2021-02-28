@@ -16,5 +16,6 @@ git push --force production master
 
 ssh $user@$AWS_HOST "cd ~/webapp && \
 pm2 kill
+npm install
 NODE_ENV=production pm2 start /home/ubuntu/webapp/server/server.js
 exit"
