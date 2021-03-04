@@ -29,10 +29,3 @@
 .form div {
   margin-bottom: 10px;
 }
-
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 10px;
-}

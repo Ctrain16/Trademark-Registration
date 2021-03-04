@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-import { Button } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import Search from "./Search";
 
 function Home({
@@ -38,7 +38,7 @@ function Home({
   ]);
 
   return (
-    <div className="App">
+    <Container component="main" maxWidth="lg">
       <Search
         search={search}
         setSearch={setSearch}
@@ -69,7 +69,7 @@ function Home({
           Login
         </Button>
       )}
-    </div>
+    </Container>
   );
 }
 

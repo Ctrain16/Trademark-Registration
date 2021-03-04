@@ -1,30 +1,15 @@
-import { Button, ButtonGroup } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Typography, Box } from "@material-ui/core";
 
 function Footer() {
   return (
     <div className="footer">
-      <ButtonGroup
-        variant="text"
-        color="primary"
-        aria-label="text primary button group"
-      >
-        <Button component={Link} to="/">
-          Home
-        </Button>
-        <Button component={Link} to="/Login">
-          Login
-        </Button>
-        <Button component={Link} to="/Signup">
-          Sign up
-        </Button>
-        <Button component={Link} to="/Register">
-          Register Trademark
-        </Button>
-        <Button component={Link} to="/Trademarks">
-          View Trademarks
-        </Button>
-      </ButtonGroup>
+      <Box mt={8}>
+        <Typography variant="body2" color="textSecondary" align="center">
+          {"~ Cal Trainor "}
+          {new Date().getFullYear()}
+          {" ~"}
+        </Typography>
+      </Box>
     </div>
   );
 }
