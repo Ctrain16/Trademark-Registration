@@ -6,14 +6,15 @@ const userSchema = require("./models/user");
 const User = mongoose.model("user", userSchema);
 const trademarkSchema = require("./models/trademark");
 const Trademark = mongoose.model("trademark", trademarkSchema);
+const secret = require("../secrets");
+const app = express();
 
 mongoose.connect(
-  "mongodb+srv://ctrain:AiRfV9TG7FTDGXhZ@cluster0.m0y2p.mongodb.net/4060-A2?retryWrites=true&w=majority",
+  "mongodb+srv://ctrain:" +
+    secret.secrets.mongoPassword +
+    "@cluster0.m0y2p.mongodb.net/4060-A2?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
-
-const app = express();
-app.use(express.static("/home/ubuntu/webapp/client/build"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());

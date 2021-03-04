@@ -1,4 +1,5 @@
 .prettierrc
+secrets.js
 
 # dependencies
 node_modules/
