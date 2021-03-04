@@ -1,39 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import {
-  Button,
-  Container,
-  InputLabel,
-  makeStyles,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+import { Button, Container, TextField, Typography } from "@material-ui/core";
 
 function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
-  const classes = useStyles();
-
   const [trademark, setTrademark] = useState("");
   const [category, setCategory] = useState("");
 
@@ -82,15 +51,14 @@ function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+      <div className="paper">
         <Typography component="h1" variant="h5">
           Register Trademark
         </Typography>
-        <form className={classes.form}>
+        <form>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="trademark"
             label="Trademark"
@@ -104,7 +72,6 @@ function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
             variant="outlined"
             margin="normal"
             select
-            required
             fullWidth
             name="category"
             label="Category"
@@ -119,15 +86,16 @@ function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
             ))}
           </TextField>
 
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={registerTrademark}
-            className={classes.submit}
-          >
-            Register
-          </Button>
+          <div className="submit-button">
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={registerTrademark}
+            >
+              Register
+            </Button>
+          </div>
         </form>
 
         <Typography variant="caption">

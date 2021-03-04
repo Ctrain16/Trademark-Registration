@@ -92,7 +92,7 @@ function App() {
     <CssBaseline>
       <ThemeProvider theme={theme}>
         <Router>
-          <Header />
+          <Header loggedIn={loggedIn} onClick={() => setLoggedIn(false)} />
           <Switch>
             <Route
               path="/"

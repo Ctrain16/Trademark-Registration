@@ -15,14 +15,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   rightButton: {
-    marginRight: theme.spacing(8),
+    marginRight: theme.spacing(6),
   },
   title: {
     flexGrow: 1,
   },
 }));
 
-function Header() {
+function Header({ loggedIn, onClick }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -53,14 +53,26 @@ function Header() {
           >
             View Trademarks
           </Button>
-          <Button
-            color="default"
-            variant="contained"
-            component={Link}
-            to="/Login"
-          >
-            Login
-          </Button>
+          {loggedIn ? (
+            <Button
+              variant="outlined"
+              size="small"
+              color="default"
+              onClick={onClick}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              color="default"
+              variant="contained"
+              component={Link}
+              to="/Login"
+              onClick={onClick}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

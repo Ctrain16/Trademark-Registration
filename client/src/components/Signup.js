@@ -16,22 +16,9 @@ import { useState } from "react";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
   },
 }));
 
@@ -72,18 +59,17 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+      <div className="paper">
         <Avatar className={classes.avatar}>
           <AccountCircle />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form className={classes.form}>
+        <form>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="name"
             label="Name"
@@ -96,7 +82,6 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="email"
             label="Email"
@@ -109,7 +94,6 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             label="Password"
@@ -127,15 +111,16 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />*/}
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={signupUser}
-            className={classes.submit}
-          >
-            Sign up
-          </Button>
+          <div className="submit-button">
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={signupUser}
+            >
+              Sign up
+            </Button>
+          </div>
           <Grid container direction="row" justify="center">
             <Link
               component="button"

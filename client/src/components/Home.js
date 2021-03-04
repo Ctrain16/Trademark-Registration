@@ -54,21 +54,6 @@ function Home({
         date={date}
         setDate={setDate}
       />
-      {loggedIn ? (
-        <Button variant="contained" color="secondary" onClick={onClick}>
-          Logout
-        </Button>
-      ) : (
-        <Button
-          variant="contained"
-          component={Link}
-          to="/Login"
-          color="primary"
-          onClick={onClick}
-        >
-          Login
-        </Button>
-      )}
     </Container>
   );
 }

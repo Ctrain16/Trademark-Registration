@@ -1,31 +1,17 @@
-.App {
-  display: flex;
-  height: 90vh;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
+/** Form Styling */
+form {
+  width: 100%;
+  margin-top: 8px;
 }
 
-.center-container {
-  width: 100vw;
-  height: 70vh;
+.paper {
+  margin-top: 100px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 30px 80px 30px 80px;
-}
-
-.form div {
-  margin-bottom: 10px;
+.submit-button {
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
