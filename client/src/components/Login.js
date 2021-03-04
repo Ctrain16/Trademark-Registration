@@ -1,10 +1,42 @@
-import { Button, TextField, Typography } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import {
+  Avatar,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Grid,
+  Link,
+  makeStyles,
+} from "@material-ui/core";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 function Login({ loggedIn, setLoggedIn, setEmail }) {
+  const classes = useStyles();
   const history = useHistory();
+
   const [tempEmail, setTempEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -43,48 +75,65 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
   }
 
   return (
-    <div className="center-container">
-      <div className="form">
-        <h1>Login</h1>
-        <form>
-          <div>
-            <TextField
-              name="email"
-              label="Email"
-              variant="outlined"
-              placeholder="example@email.com"
-              value={tempEmail}
-              onChange={(e) => setTempEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <TextField
-              name="password"
-              label="Password"
-              variant="outlined"
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <Button variant="contained" color="primary" onClick={loginUser}>
-              Login
-            </Button>
-          </div>
-        </form>
-
-        <div>
-          <Typography variant="subtitle2">
-            Don't have an account?{" "}
-            <Link to="/Signup" style={{ color: "blue" }}>
-              Sign Up
+    <Container component="main" maxWidth="xs">
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <AccountCircle />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <form className={classes.form}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email"
+            id="email"
+            autoComplete="email"
+            placeholder="example@email.com"
+            value={tempEmail}
+            onChange={(e) => setTempEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={loginUser}
+            className={classes.submit}
+          >
+            Login
+          </Button>
+          <Grid container direction="row" justify="center">
+            <Link
+              component="button"
+              variant="body2"
+              onClick={() => {
+                history.push("./Signup");
+              }}
+            >
+              Don't have an account? Sign up
             </Link>
-          </Typography>
-        </div>
+          </Grid>
+        </form>
       </div>
-    </div>
+    </Container>
   );
 }
 

@@ -1,12 +1,20 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import "fontsource-roboto";
+
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Footer from "./components/Footer";
 import Register from "./components/Register";
 import Trademarks from "./components/Trademarks";
+import Copyright from "./components/Copyright";
+
+const theme = createMuiTheme({});
 
 function App() {
   const trademarkCategories = [
@@ -67,91 +75,98 @@ function App() {
   const [date, setDate] = useState("");
 
   return (
-    <div>
-      <Router>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            render={(props) => (
-              <Home
-                loggedIn={loggedIn}
-                onClick={() => setLoggedIn(false)}
-                search={search}
-                setSearch={setSearch}
-                resultsList={resultsList}
-                setResultsList={setResultsList}
-                trademarkCategories={trademarkCategories}
-                category={category}
-                setCategory={setCategory}
-                ownerName={ownerName}
-                setOwnerName={setOwnerName}
-                ownerEmail={ownerEmail}
-                setOwnerEmail={setOwnerEmail}
-                date={date}
-                setDate={setDate}
+    <CssBaseline>
+      <ThemeProvider theme={theme}>
+        <div>
+          <Router>
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={(props) => (
+                  <Home
+                    loggedIn={loggedIn}
+                    onClick={() => setLoggedIn(false)}
+                    search={search}
+                    setSearch={setSearch}
+                    resultsList={resultsList}
+                    setResultsList={setResultsList}
+                    trademarkCategories={trademarkCategories}
+                    category={category}
+                    setCategory={setCategory}
+                    ownerName={ownerName}
+                    setOwnerName={setOwnerName}
+                    ownerEmail={ownerEmail}
+                    setOwnerEmail={setOwnerEmail}
+                    date={date}
+                    setDate={setDate}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/Login"
-            exact
-            render={(props) => (
-              <Login
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                setEmail={setEmail}
+              <Route
+                path="/Login"
+                exact
+                render={(props) => (
+                  <Login
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                    setEmail={setEmail}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/Signup"
-            exact
-            render={(props) => (
-              <Signup
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                setEmail={setEmail}
+              <Route
+                path="/Signup"
+                exact
+                render={(props) => (
+                  <Signup
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                    setEmail={setEmail}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/Register"
-            exact
-            render={(props) => (
-              <Register
-                loggedIn={loggedIn}
-                email={email}
-                setResultsList={setResultsList}
-                trademarkCategories={trademarkCategories}
+              <Route
+                path="/Register"
+                exact
+                render={(props) => (
+                  <Register
+                    loggedIn={loggedIn}
+                    email={email}
+                    setResultsList={setResultsList}
+                    trademarkCategories={trademarkCategories}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/Trademarks"
-            exact
-            render={(props) => (
-              <Trademarks
-                resultsList={resultsList}
-                setResultsList={setResultsList}
-                search={search}
-                setSearch={setSearch}
-                trademarkCategories={trademarkCategories}
-                category={category}
-                setCategory={setCategory}
-                ownerName={ownerName}
-                setOwnerName={setOwnerName}
-                ownerEmail={ownerEmail}
-                setOwnerEmail={setOwnerEmail}
-                date={date}
-                setDate={setDate}
+              <Route
+                path="/Trademarks"
+                exact
+                render={(props) => (
+                  <Trademarks
+                    resultsList={resultsList}
+                    setResultsList={setResultsList}
+                    search={search}
+                    setSearch={setSearch}
+                    trademarkCategories={trademarkCategories}
+                    category={category}
+                    setCategory={setCategory}
+                    ownerName={ownerName}
+                    setOwnerName={setOwnerName}
+                    ownerEmail={ownerEmail}
+                    setOwnerEmail={setOwnerEmail}
+                    date={date}
+                    setDate={setDate}
+                  />
+                )}
               />
-            )}
-          />
-        </Switch>
-        <Footer />
-      </Router>
-    </div>
+            </Switch>
+            <Footer />
+            <Box mt={8}>
+              <Copyright />
+            </Box>
+          </Router>
+        </div>
+      </ThemeProvider>
+    </CssBaseline>
   );
 }
 
