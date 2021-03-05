@@ -1,6 +1,7 @@
+import { Container } from "@material-ui/core";
 import { useEffect } from "react";
 
-import Axios from "axios";
+import axios from "axios";
 
 import Search from "./Search";
 
@@ -28,7 +29,7 @@ function Trademarks({
       !category &&
       !date
     ) {
-      Axios.get("http://localhost:3001/api/trademarks").then((response) => {
+      axios.get("http://localhost:3001/api/trademarks").then((response) => {
         setResultsList(response.data);
       });
     }
@@ -47,7 +48,7 @@ function Trademarks({
   ]);
 
   return (
-    <div>
+    <Container component="main" maxWidth="lg">
       <div>
         <Search
           setResultsList={setResultsList}
@@ -91,7 +92,7 @@ function Trademarks({
           })}
         </tbody>
       </table>
-    </div>
+    </Container>
   );
 }
 

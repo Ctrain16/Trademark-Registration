@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import "fontsource-roboto";
 
-import Home from "./components/Home";
+import Search from "./components/Search";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Footer from "./components/Footer";
@@ -98,13 +98,11 @@ function App() {
               path="/"
               exact
               render={(props) => (
-                <Home
-                  loggedIn={loggedIn}
-                  onClick={() => setLoggedIn(false)}
+                <Search
                   search={search}
                   setSearch={setSearch}
-                  resultsList={resultsList}
                   setResultsList={setResultsList}
+                  searchType="home"
                   trademarkCategories={trademarkCategories}
                   category={category}
                   setCategory={setCategory}
