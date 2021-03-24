@@ -1,0 +1,14 @@
+{
+  "name": "heroku-app",
+  "version": "1.0.0",
+  "description": "Package for heroku",
+  "main": "web.js",
+  "keywords": [
+    "heroku"
+  ],
+  "author": "Cal Trainor",
+  "license": "",
+  "engines": {
+    "node": "14.x"
+  }
+}
