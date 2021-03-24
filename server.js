@@ -6,18 +6,23 @@ const userSchema = require("./models/user");
 const User = mongoose.model("user", userSchema);
 const trademarkSchema = require("./models/trademark");
 const Trademark = mongoose.model("trademark", trademarkSchema);
-const secret = require("../secrets");
+const secret = require("./secrets");
 const app = express();
+const path = require("path");
+
+const mongoPassword =
+  process.env.MONGO_PASSWORD || secret.secrets.mongoPassword;
 
 mongoose.connect(
   "mongodb+srv://ctrain:" +
-    secret.secrets.mongoPassword +
+    mongoPassword +
     "@cluster0.m0y2p.mongodb.net/4060-A2?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 if (process.env.NODE_ENV !== "production") {
   app.use(cors());
@@ -103,6 +108,10 @@ app.post("/api/search", async (req, res) => {
   } catch (error) {
     console.log("Error", error);
   }
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 app.listen(3001, () => {
