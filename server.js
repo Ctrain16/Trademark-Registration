@@ -6,13 +6,11 @@ const userSchema = require("./models/user");
 const User = mongoose.model("user", userSchema);
 const trademarkSchema = require("./models/trademark");
 const Trademark = mongoose.model("trademark", trademarkSchema);
-const secret = require("./secrets");
+//const secret = require("./secrets");
 const app = express();
 const path = require("path");
 
-const mongoPassword =
-  process.env.MONGO_PASSWORD || secret.secrets.mongoPassword;
-
+const mongoPassword = process.env.MONGO_PASSWORD; //secret.secrets.mongoPassword;
 mongoose.connect(
   "mongodb+srv://ctrain:" +
     mongoPassword +
@@ -113,6 +111,8 @@ app.post("/api/search", async (req, res) => {
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
+
+const port = process.env.PORT || 3001;
 
 app.listen(3001, () => {
   console.log("running on  port 3001");
