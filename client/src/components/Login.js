@@ -70,7 +70,7 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form>
+        <form className="form">
           <TextField
             variant="outlined"
             margin="normal"

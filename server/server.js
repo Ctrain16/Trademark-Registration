@@ -82,14 +82,16 @@ app.get("/api/trademarks", async (req, res) => {
 });
 
 app.post("/api/search", async (req, res) => {
-  const { name, email, category, date } = req.body;
-  const search = req.body.query;
-  console.log(date);
+  const { name, email, category, query } = req.body;
+
+  var date = "";
+  if (req.body.date === "") date = "2000-01-01";
+  else date = req.body.date;
 
   try {
     const results = await Trademark.find({
       $and: [
-        { trademark: { $regex: search } },
+        { trademark: { $regex: query } },
         { category: { $regex: category } },
         { owner: { $regex: name } },
         { email: { $regex: email } },

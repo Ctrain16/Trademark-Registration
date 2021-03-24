@@ -66,7 +66,7 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form>
+        <form className="form">
           <TextField
             variant="outlined"
             margin="normal"

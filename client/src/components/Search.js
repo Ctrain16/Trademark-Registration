@@ -7,14 +7,21 @@ import {
   TextField,
   Grid,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   searchButton: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(3),
     backgroundColor: theme.palette.secondary.light,
     width: 100,
+  },
+  searchButton2: {
+    backgroundColor: theme.palette.secondary.light,
+    width: 500,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(4),
   },
 }));
 
@@ -55,13 +62,19 @@ function Search({
   if (searchType === "home") {
     return (
       <Container component="main" maxWidth="xs">
-        <div className={searchType === "home" ? "paper" : "results-search"}>
-          <h1>CTRC</h1>
-          {searchType === "home" && (
-            <h3> Cal's Trademark Registration Center</h3>
-          )}
+        <div className="paper">
+          <Typography variant="h4">CTRC</Typography>
+          <Typography
+            variant="subtitle1"
+            style={{
+              marginTop: 10,
+              marginBottom: 20,
+            }}
+          >
+            Cal's Trademark Registration Center
+          </Typography>
 
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => e.preventDefault()} className="form">
             <TextField
               type="text"
               name="search"
@@ -94,64 +107,128 @@ function Search({
     );
   } else {
     return (
-      <form onSubmit={(e) => e.preventDefault()}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          select
-          name="category"
-          label="Category"
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            searchDatabase();
+          }}
+          className="trademark-search"
         >
-          {trademarkCategories.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </TextField>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          name="ownerName"
-          label="Owner"
-          id="owner"
-          placeholder="Owner Name"
-          value={ownerName}
-          onChange={(e) => setOwnerName(e.target.value)}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          name="ownerEmail"
-          label="Email"
-          id="email"
-          placeholder="Owner Email"
-          value={ownerEmail}
-          onChange={(e) => setOwnerEmail(e.target.value)}
-        />
-        <TextField
-          variant="outlined"
-          id="date"
-          label="Date"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <input
-          type="submit"
-          hidden
-          style={{
-            position: "absolute left: -9999px",
-            width: "1px",
-            height: "1px",
-          }}
-        />
-      </form>
+          <div className="searchbar">
+            <TextField
+              type="text"
+              name="search"
+              margin="normal"
+              size="small"
+              placeholder="Search CTRC database"
+              label="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+
+          <div>
+            <TextField
+              margin="normal"
+              select
+              label="Category"
+              size="small"
+              name="category"
+              SelectProps={{
+                native: true,
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
+            >
+              <option value="" disabled>
+                Select Trademark Category
+              </option>
+              {trademarkCategories.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </TextField>
+          </div>
+
+          <div>
+            <TextField
+              margin="normal"
+              size="small"
+              name="ownerName"
+              label="Owner"
+              id="owner"
+              placeholder="Owner Name"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={ownerName}
+              onChange={(e) => setOwnerName(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <TextField
+              margin="normal"
+              size="small"
+              name="ownerEmail"
+              label="Email"
+              id="email"
+              placeholder="Owner Email"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={ownerEmail}
+              onChange={(e) => setOwnerEmail(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <TextField
+              id="date"
+              margin="normal"
+              size="small"
+              label="Registration Date"
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
+
+          <input
+            type="submit"
+            hidden
+            style={{
+              position: "absolute left: -9999px",
+              width: "1px",
+              height: "1px",
+            }}
+          />
+        </form>
+        <Grid container direction="row" justify="center">
+          <Button
+            className={classes.searchButton2}
+            variant="contained"
+            onClick={searchDatabase}
+          >
+            Search
+          </Button>
+        </Grid>
+      </div>
     );
   }
 }
