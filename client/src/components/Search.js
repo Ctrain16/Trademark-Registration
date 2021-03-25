@@ -178,9 +178,7 @@ function Search({
               onChange={(e) => setCategory(e.target.value)}
               value={category}
             >
-              <option value="" disabled>
-                Select Trademark Category
-              </option>
+              <option value="">All Categories</option>
               {trademarkCategories.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
