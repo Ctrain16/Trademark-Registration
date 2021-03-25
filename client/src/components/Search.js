@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
 import {
   Button,
   Container,
@@ -14,11 +15,13 @@ import SearchIcon from "@material-ui/icons/Search";
 const useStyles = makeStyles((theme) => ({
   searchButton: {
     margin: theme.spacing(3),
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.primary.dark,
+    color: "white",
     width: 100,
   },
   searchButton2: {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.primary.dark,
+    color: "white",
     width: 500,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(4),
@@ -42,6 +45,25 @@ function Search({
 }) {
   const history = useHistory();
   const classes = useStyles();
+
+  useEffect(() => {
+    if (searchType === "home") {
+      setSearch("");
+      setResultsList([]);
+      setOwnerName("");
+      setOwnerEmail("");
+      setCategory("");
+      setDate("");
+    }
+  }, [
+    searchType,
+    setCategory,
+    setDate,
+    setOwnerEmail,
+    setOwnerName,
+    setResultsList,
+    setSearch,
+  ]);
 
   function searchDatabase() {
     axios
