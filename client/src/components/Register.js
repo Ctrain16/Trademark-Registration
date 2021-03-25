@@ -74,10 +74,18 @@ function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
             fullWidth
             name="category"
             label="Category"
-            id="category"
+            SelectProps={{
+              native: true,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
+            <option value="" disabled>
+              Select Category
+            </option>
             {trademarkCategories.map((option) => (
               <option key={option} value={option}>
                 {option}
