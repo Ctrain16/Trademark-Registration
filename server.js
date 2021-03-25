@@ -10,7 +10,9 @@ const Trademark = mongoose.model("trademark", trademarkSchema);
 const app = express();
 const path = require("path");
 
-const mongoPassword = process.env.MONGO_PASSWORD; //secret.secrets.mongoPassword;
+const mongoPassword = process.env.MONGO_PASSWORD; //secret.secrets.mongoPassword
+console.log(mongoPassword);
+
 mongoose.connect(
   "mongodb+srv://ctrain:" +
     mongoPassword +
@@ -113,6 +115,8 @@ app.get("*", (req, res) => {
 });
 
 const port = process.env.PORT || 3001;
+
+console.log(port);
 
 app.listen(port, () => {
   console.log("running on  port 3001");
