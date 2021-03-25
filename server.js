@@ -119,5 +119,5 @@ const port = process.env.PORT || 3001;
 console.log(port);
 
 app.listen(port, () => {
-  console.log("running on  port 3001");
+  console.log("running on  port " + port);
 });
