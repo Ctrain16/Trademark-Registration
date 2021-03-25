@@ -37,7 +37,7 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
       alert("You are already logged into an account");
     } else {
       axios
-        .post("http://localhost:3001/api/login", {
+        .post("/api/login", {
           email: tempEmail.toLowerCase(),
         })
         .then((response) => {

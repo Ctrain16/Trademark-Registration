@@ -16,14 +16,14 @@ function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
 
     if (loggedIn) {
       axios
-        .post("http://localhost:3001/api/login", {
+        .post("/api/login", {
           email: email.toLowerCase(),
         })
         .then((response) => {
           const name = response.data.name;
 
           axios
-            .post("http://localhost:3001/api/register", {
+            .post("/api/register", {
               trademark: trademark,
               owner: name,
               email: email,

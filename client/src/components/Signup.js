@@ -4,8 +4,6 @@ import {
   TextField,
   Typography,
   Avatar,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Container,
@@ -37,7 +35,7 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
     }
 
     axios
-      .post("http://localhost:3001/api/signup", {
+      .post("/api/signup", {
         name: name,
         email: tempEmail.toLowerCase(),
         password: password,
