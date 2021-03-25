@@ -30,7 +30,6 @@ function Register({ loggedIn, email, setResultsList, trademarkCategories }) {
               category: category,
             })
             .then((response) => {
-              console.log(response);
               if (response.data !== "Trademark Exists") {
                 alert("Trademark successfully registered.");
                 setTrademark("");

@@ -70,7 +70,12 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className="form">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="form"
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -98,6 +103,7 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
           />
           <div className="submit-button">
             <Button
+              type="submit"
               fullWidth
               variant="contained"
               color="primary"
@@ -110,6 +116,7 @@ function Login({ loggedIn, setLoggedIn, setEmail }) {
           <Grid container direction="row" justify="center">
             <Link
               component="button"
+              type="button"
               variant="body2"
               onClick={() => {
                 history.push("./Signup");

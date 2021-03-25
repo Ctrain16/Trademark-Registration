@@ -75,7 +75,6 @@ function Search({
         category: category,
       })
       .then((response) => {
-        console.log(response);
         setResultsList(response.data);
         history.push("/Trademarks");
       });
@@ -96,7 +95,13 @@ function Search({
             Cal's Trademark Registration Center
           </Typography>
 
-          <form onSubmit={(e) => e.preventDefault()} className="form">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              searchDatabase();
+            }}
+            className="form"
+          >
             <TextField
               type="text"
               name="search"

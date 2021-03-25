@@ -64,7 +64,12 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form className="form">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="form"
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -73,7 +78,7 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
             label="Name"
             id="name"
             autoComplete="name"
-            placeholder="Firstname Lastname"
+            placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -102,15 +107,10 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/**
-           * Implement remember me functionality
-           * 
-           * <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />*/}
+
           <div className="submit-button">
             <Button
+              type="submit"
               fullWidth
               variant="contained"
               color="primary"
@@ -119,9 +119,11 @@ function Signup({ loggedIn, setLoggedIn, setEmail }) {
               Sign up
             </Button>
           </div>
+
           <Grid container direction="row" justify="center">
             <Link
               component="button"
+              type="button"
               variant="body2"
               onClick={() => {
                 history.push("./Login");

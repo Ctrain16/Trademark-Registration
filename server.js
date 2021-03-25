@@ -103,10 +103,10 @@ app.post("/api/search", async (req, res) => {
   try {
     const results = await Trademark.find({
       $and: [
-        { trademark: { $regex: query } },
-        { category: { $regex: category } },
-        { owner: { $regex: name } },
-        { email: { $regex: email } },
+        { trademark: { $regex: query, $options: "i" } },
+        { category: { $regex: category, $options: "i" } },
+        { owner: { $regex: name, $options: "i" } },
+        { email: { $regex: email, $options: "i" } },
         { registrationDate: { $gte: date } },
       ],
     });
