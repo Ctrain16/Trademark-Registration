@@ -11,7 +11,6 @@ const app = express();
 const path = require("path");
 
 const mongoPassword = process.env.MONGO_PASSWORD; //secret.secrets.mongoPassword
-console.log(mongoPassword);
 
 mongoose.connect(
   "mongodb+srv://ctrain:" +
@@ -115,8 +114,6 @@ app.get("*", (req, res) => {
 });
 
 const port = process.env.PORT || 3001;
-
-console.log(port);
 
 app.listen(port, () => {
   console.log("running on  port " + port);

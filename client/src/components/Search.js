@@ -45,7 +45,7 @@ function Search({
 
   function searchDatabase() {
     axios
-      .post("http://localhost:" + process.env.PORT + "/api/search", {
+      .post("/api/search", {
         query: search,
         name: ownerName,
         email: ownerEmail,

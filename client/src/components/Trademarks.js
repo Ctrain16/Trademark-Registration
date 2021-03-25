@@ -29,11 +29,9 @@ function Trademarks({
       !category &&
       !date
     ) {
-      axios
-        .get("http://localhost:" + process.env.PORT + "/api/trademarks")
-        .then((response) => {
-          setResultsList(response.data);
-        });
+      axios.get("/api/trademarks").then((response) => {
+        setResultsList(response.data);
+      });
     }
   }, [
     category,
