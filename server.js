@@ -1,16 +1,23 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userSchema = require("./models/user");
 const User = mongoose.model("user", userSchema);
 const trademarkSchema = require("./models/trademark");
 const Trademark = mongoose.model("trademark", trademarkSchema);
-//const secret = require("./secrets");
 const app = express();
 const path = require("path");
 
-const mongoPassword = process.env.MONGO_PASSWORD; //secret.secrets.mongoPassword
+var mongoPassword;
+if (process.env.NODE_ENV === "production") {
+  console.log("production connection");
+  mongoPassword = process.env.MONGO_PASSWORD;
+} else {
+  console.log("development connection");
+  const secret = require("./secrets");
+  mongoPassword = secret.secrets.mongoPassword;
+  app.use(cors());
+}
 
 mongoose.connect(
   "mongodb+srv://ctrain:" +
@@ -18,14 +25,15 @@ mongoose.connect(
     "@cluster0.m0y2p.mongodb.net/4060-A2?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
+mongoose.set("useCreateIndex", true);
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.static(path.join(__dirname, "client", "build")));
-
-if (process.env.NODE_ENV !== "production") {
-  app.use(cors());
-}
 
 app.post("/api/signup", async (req, res) => {
   const { email, name, password } = req.body;
