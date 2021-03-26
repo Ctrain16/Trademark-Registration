@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Register from "./components/Register";
 import Trademarks from "./components/Trademarks";
 import Header from "./components/Header";
+import About from "./components/About";
 
 const theme = createMuiTheme({
   palette: {
@@ -170,6 +171,7 @@ function App() {
                 />
               )}
             />
+            <Route path="/About" exact render={(props) => <About />} />
           </Switch>
           <Footer />
         </Router>

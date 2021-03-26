@@ -4,9 +4,12 @@ import {
   Typography,
   Button,
   makeStyles,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import HomeIcon from "@material-ui/icons/Home";
+import MenuIcon from "@material-ui/icons/Menu";
+import React from "react";
 
 import { Link, useHistory } from "react-router-dom";
 
@@ -15,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   rightButton: {
-    marginRight: theme.spacing(6),
+    marginRight: theme.spacing(4),
   },
   title: {
     flexGrow: 1,
@@ -26,6 +29,17 @@ function Header({ loggedIn, onClick }) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const menuClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const menuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,26 +47,57 @@ function Header({ loggedIn, onClick }) {
           <IconButton
             edge="start"
             color="inherit"
-            aria-label="menu"
-            onClick={() => history.push("/")}
+            aria-label="more"
+            aria-controls="long-menu"
+            aria-haspopup="true"
+            onClick={menuClick}
           >
-            <HomeIcon fontSize="small" />
+            <MenuIcon />
           </IconButton>
+          <Menu
+            id="long-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={menuClose}
+          >
+            <MenuItem
+              onClick={() => {
+                menuClose();
+                history.push("/");
+              }}
+            >
+              Home
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                menuClose();
+                history.push("/Register");
+              }}
+            >
+              Register Trademark
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                menuClose();
+                history.push("/Trademarks");
+              }}
+            >
+              View Trademarks
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                menuClose();
+                history.push("/About");
+              }}
+            >
+              About
+            </MenuItem>
+          </Menu>
+
           <Typography variant="h5" className={classes.title}>
             CTRC
           </Typography>
-          <Button color="inherit" size="small" component={Link} to="/Register">
-            Register Trademark
-          </Button>
-          <Button
-            className={classes.rightButton}
-            color="inherit"
-            size="small"
-            component={Link}
-            to="/Trademarks"
-          >
-            View Trademarks
-          </Button>
           {loggedIn ? (
             <Button
               variant="outlined"
