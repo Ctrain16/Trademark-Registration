@@ -5,4 +5,4 @@ A web app that was created in order to implement a trademark registration system
 
 ## Heroku
 
-The live app can be viewed at https://cs4060-project.herokuapp.com/
+The live app can be viewed at https://cs4060-project.herokuapp.com/ (instance make take ~30 seconds to wake up)
